@@ -4,7 +4,7 @@
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="todo in todoList" type="item-text-wrap">
         <h2>{{todo.title}}</h2>
         <p>Done : {{todo.done}}</p>
-        <i class="icon ion-checkmark-round ng-click"></i>
+        <i class="icon ion-checkmark-round" ng-click="toggleStatus(todo)"></i>
       </ion-item>
     </ion-list>
 

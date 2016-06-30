@@ -29,6 +29,15 @@ angular.module('starter.controllers', [])
     todo.title = "";
   };
 
+  $scope.toggleStatus = function(todo) {
+    if(todo.done == true){
+      todo.done = false;
+    }
+    else{
+      todo.done = true;
+    }
+  }
+
   $scope.createProject = function(project) {
     $scope.projects.push({
       title: project.title
