@@ -1,0 +1,21 @@
+<ion-view view-title="Projects">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="project in projects">
+        {{project.title}}
+      </ion-item>
+    </ion-list>
+
+    <h3>Create a project</h3>
+    <form ng-submit="createProject(project)">
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="What do you want to achieve ?" ng-model="project.title">
+        </label>
+      </div>
+      <div class="padding">
+        <button type="submit" class="button button-block button-positive">Create project</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

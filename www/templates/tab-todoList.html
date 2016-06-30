@@ -1,0 +1,23 @@
+<ion-view view-title="todo list">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="todo in todoList" type="item-text-wrap">
+        <h2>{{todo.title}}</h2>
+        <p>Done : {{todo.done}}</p>
+        <i class="icon ion-checkmark-round ng-click"></i>
+      </ion-item>
+    </ion-list>
+
+    <h3>Create a task</h3>
+    <form ng-submit="createTodo(todo)">
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="What do you need to do?" ng-model="todo.title">
+        </label>
+      </div>
+      <div class="padding">
+        <button type="submit" class="button button-block button-positive">Create Todo</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
