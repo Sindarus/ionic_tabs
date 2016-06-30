@@ -68,25 +68,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'ChatDetailCtrl'
       }
     }
-  })
-
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  })
-
-  .state('tab.mytab', {
-    url: '/mytab',
-    views: {
-      'tab-mytab': {
-        templateUrl: 'templates/tab-mytab.html'
-      }
-    }
   });
 
   // if none of the above states are matched, use this as the fallback
