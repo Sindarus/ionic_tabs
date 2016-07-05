@@ -1,7 +1,8 @@
 <ion-view view-title="Projects">
   <ion-content>
+    <!-- message : {{message}} -->
     <ion-list>
-      <ion-item ng-repeat="project in projects">
+      <ion-item ng-repeat="project in projects" ng-click="selectProject(project.id)" ng-class="{active: cur_project.id == project.id}">
         {{project.title}}
       </ion-item>
     </ion-list>

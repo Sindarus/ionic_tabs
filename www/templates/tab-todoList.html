@@ -1,7 +1,10 @@
 <ion-view view-title="todo list">
   <ion-content>
+<!--     <p>message : {{message}}</p>
+    <p>cur_project : {{cur_project}}</p> -->
+    <h3>current project: {{cur_project.title}}</h2>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="todo in todoList" type="item-text-wrap">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="todo in cur_project.todos" type="item-text-wrap">
         <h2>{{todo.title}}</h2>
         <p>Done : {{todo.done}}</p>
         <i class="icon ion-checkmark-round" ng-click="toggleStatus(todo)"></i>
