@@ -62,36 +62,25 @@ myApp.factory('s_projects', function(){
   };
 });
 
+// returns [start, start+1, start+2, ..., start+(count-1)]
+function range(start, count) {
+  return Array.apply(0, Array(count))
+    .map(function (element, index) {
+      return index + start;
+  });
+}
+
 myApp.controller('todoListCtrl', function($rootScope, s_projects) {
-  $rootScope.projects = s_projects.getAll();
-  $rootScope.message = $rootScope.projects;
+  $rootScope.include = function(arr, obj) {
+    return (arr.indexOf(obj) != -1);
+  }
 
-  // Called when the form is submitted
-  $rootScope.createTodo = function(todo) {
-    s_projects.addTodo(todo.title)
-    //clear form
-    todo.title = "";
-    $rootScope.cur_project = s_projects.getSelected();
-    $rootScope.projects = s_projects.getAll();
-  };
-
-  $rootScope.toggleStatus = function(todo) {
-    if(todo.done == true){
-      todo.done = false;
-    }
-    else{
-      todo.done = true;
+  $rootScope.hours = [];
+  for(var hour=0; hour<24; hour++){
+    for(min of ["00", "15", "30", "45"]){
+      $rootScope.hours.push(hour.toString() + "h" + min);
     }
   }
 
-  $rootScope.createProject = function(project) {
-    s_projects.add(project);
-    project.title = "";
-    $rootScope.projects = s_projects.getAll();
-  }
-
-  $rootScope.selectProject = function(project_id) {
-    s_projects.selectById(project_id);
-    $rootScope.cur_project = s_projects.getSelected();
-  }
+  $rootScope.hour_index_range = range(64, 12);
 })

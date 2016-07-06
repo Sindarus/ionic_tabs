@@ -3,16 +3,32 @@ Create tabs with an icon and label, using the tabs-positive style.
 Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
-<ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-  <!-- Dashboard Tab -->
+<!-- <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+
   <ion-tab title="Projects" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/projects">
     <ion-nav-view name="tab-projects"></ion-nav-view>
   </ion-tab>
-
-  <!-- Chats Tab -->
   <ion-tab title="todo list" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" href="#/tab/todoList">
     <ion-nav-view name="tab-todoList"></ion-nav-view>
   </ion-tab>
 
-</ion-tabs>
+</ion-tabs> -->
+
+<div id="header">
+  <div id="back_arrow">
+    <a href="#">
+      <img src="img/back_arrow.png"></img>
+    </a>
+  </div>
+  <div id="logo">
+    <img src="img/logo.png"></img>
+  </div>
+  <div id="action_bar">
+    <img src="img/action_bar.png"></img>
+  </div>
+</div>
+
+<ion-nav-view name="tab-projects"><!-- here we will render tab/projetcs NAME ATTRIBUTE IS RELEVANT. This is managed by ui-router --></ion-nav-view>
+<ion-nav-view name="tab-todoList"><!-- here we will render tab/todoList NAME ATTRIBUTE IS RELEVANT. This is managed by ui-router --></ion-nav-view>
+

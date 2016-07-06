@@ -1,22 +1,33 @@
-<ion-view view-title="Projects">
-  <ion-content>
-    <!-- message : {{message}} -->
-    <ion-list>
-      <ion-item ng-repeat="project in projects" ng-click="selectProject(project.id)" ng-class="{active: cur_project.id == project.id}">
-        {{project.title}}
-      </ion-item>
-    </ion-list>
+<ion-view view-title="shop booking" >
+  <ion-content id="shop_booking">
+    <div id="shop_img">
+      <img src="img/shop.jpg"/>
+    </div>
+    <div id="shop_intro">
+      <h1>Le Café des invalides</h1>
+      <p>Ouvert aujourd'hui : <span class="opening_hours">10:00-22:00</span></p>
+    </div>
+    <div id="booking">
+      <h2>réserver une table</h2>
+      <div id="booking_infos">
+        <div class="h_separator"></div>
+        <div class="my_container">
+          <span>22/06/2016</span>
+          <div class="v_separator"></div>
+          <span>2 personnes</span>
+        </div>
+        <div class="h_separator"></div>
+      </div>
+      <div id="hour_picker">
+        <img src="img/left_arrow.png"/>
+        <div id="hour_buttons">
+          <div class="hour_button" ng-repeat="(index, hour) in hours" ng-show="include(hour_index_range, index)">{{hour}}</div>
+        </div>
+        <img src="img/right_arrow.png"/>
+      </div>
+      <p id="recap">Blibliblou.</p>
+      <span id="validate">valider</span>
+    </div> <!-- <div id="booking"> -->
 
-    <h3>Create a project</h3>
-    <form ng-submit="createProject(project)">
-      <div class="list">
-        <label class="item item-input">
-          <input type="text" placeholder="What do you want to achieve ?" ng-model="project.title">
-        </label>
-      </div>
-      <div class="padding">
-        <button type="submit" class="button button-block button-positive">Create project</button>
-      </div>
-    </form>
   </ion-content>
 </ion-view>
