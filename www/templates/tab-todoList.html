@@ -1,27 +1,29 @@
-<ion-view view-title="todo list">
-  <ion-content>
-<!--     <p>message : {{message}}</p>
-    <p>cur_project : {{cur_project}}</p> -->
-    <h3>current project: {{cur_project.title}}</h2>
-    <a href="#/tab/projects">Back to project list</a>
-    <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="todo in cur_project.todos" type="item-text-wrap">
-        <h2>{{todo.title}}</h2>
-        <p>Done : {{todo.done}}</p>
-        <i class="icon ion-checkmark-round" ng-click="toggleStatus(todo)"></i>
+<ion-view view-title="my bookings" >
+  <ion-content id="my_bookings">
+    <div id="intro">
+      Glisser pour annuler
+    </div>
+    <ion-list can-swipe="true" id="booking_list">
+      <ion-item class="booking_card" ng-repeat="booking in bookings">
+        <div class="booking_data">
+          <div class="booking_info">
+            <div class="title">{{booking.shop}}</div>
+            <div class="booking_details">
+              <div class="booking_detail icon-left ion-calendar"> {{booking.date | date: 'dd/MM/yyyy'}} à {{booking.hour}}
+              </div>
+              <div class="booking_detail icon-left ion-android-people">  {{booking.amount}} personnes
+              </div>
+            </div>
+          </div>
+          <div class="booking_category">
+            <img src="img/glasses.png"/>
+          </div>
+        </div> <!-- <div class="booking_info"> -->
+        <div class="go_there_button icon-left ion-arrow-return-right">  y aller
+        </div>
+        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="remove(booking.id)"></ion-option-button>
       </ion-item>
     </ion-list>
-
-    <h3>Create a task</h3>
-    <form ng-submit="createTodo(todo)">
-      <div class="list">
-        <label class="item item-input">
-          <input type="text" placeholder="What do you need to do?" ng-model="todo.title">
-        </label>
-      </div>
-      <div class="padding">
-        <button type="submit" class="button button-block button-positive">Create Todo</button>
-      </div>
-    </form>
+    <div class="spacer"/>
   </ion-content>
 </ion-view>

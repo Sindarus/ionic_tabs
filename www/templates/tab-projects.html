@@ -12,22 +12,27 @@
       <div id="booking_infos">
         <div class="h_separator"></div>
         <div class="my_container">
-          <span>22/06/2016</span>
+          <div class="input_container">
+            <input id="date_input" type="date" ng-model="booking_date"/>
+          </div>
           <div class="v_separator"></div>
-          <span>2 personnes</span>
+          <div class="input_container">
+            <input id="number_input" type="number" ng-model="booking_amount"/>
+            <span>personne(s)</span>
+          </div>
         </div>
         <div class="h_separator"></div>
       </div>
       <div id="hour_picker">
-        <img src="img/left_arrow.png"/>
+        <img src="img/left_arrow.png" ng-click="earlier()"/>
         <div id="hour_buttons">
-          <div class="hour_button" ng-repeat="(index, hour) in hours" ng-show="include(hour_index_range, index)">{{hour}}</div>
+          <div class="hour_button" ng-repeat="(index, hour) in hours" ng-show="include(hour_index_range, index)" ng-click="select_hour(hour)" ng-class="hour_button_class(hour)">{{hour}}</div>
         </div>
-        <img src="img/right_arrow.png"/>
+        <img src="img/right_arrow.png" ng-click="later()"/>
       </div>
-      <p id="recap">Blibliblou.</p>
-      <span id="validate">valider</span>
+      <p id="recap">Réserver le {{booking_date | date: 'dd/MM/yyyy'}} à {{booking_hour}} pour {{booking_amount}} personne(s).</p>
+      <a href="#/tab/todoList"><span id="validate" ng-click="book(cur_shop, booking_date, booking_hour, booking_amount)">valider</span></a>
+      <div class="spacer"></div>
     </div> <!-- <div id="booking"> -->
-
   </ion-content>
 </ion-view>

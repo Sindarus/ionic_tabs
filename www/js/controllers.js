@@ -1,67 +1,5 @@
 var myApp = angular.module('starter.controllers', []);
 
-// create new service
-// this is the way to create a service : call factory() on the app. First parameter
-// is the service's name, and second is a function returning an object, that thus
-// becomes a service. So how is it better than a js object ? Dependance injection, maybe
-myApp.factory('s_projects', function(){
-  return {
-    getAll: function(){
-      var jsoned = window.localStorage['projects'];
-      if(jsoned) {
-        return angular.fromJson(jsoned);
-      }
-      return [];
-    },
-    add: function(project){
-      var projects = this.getAll();
-
-      //if we have never set next_id (which holds the id of the next project to record)
-      if(typeof this.next_id === 'undefined'){
-        this.next_id = 0;
-      }
-
-      project.id = this.next_id;
-      project.todos = [];
-      projects.push(project);
-      window.localStorage['projects'] = angular.toJson(projects);
-
-      this.next_id += 1;
-    },
-    getById: function(id){
-      var projects = this.getAll();
-      for(project of projects){
-        if(project.id == id){
-          return project;
-        }
-      }
-    },
-    selectById: function(id){
-      window.localStorage["selected_id"] = id;
-    },
-    hasSelected: function(){
-      return (typeof window.localStorage["selected_id"] !== 'undefined');
-    },
-    getSelected: function(){
-      if(! this.hasSelected()){
-        console.log("s_projects.getSelected() : no project selected");
-      }
-      return this.getById(window.localStorage["selected_id"]);
-    },
-    addTodo: function(todo_message){
-      //adds todo to selected project
-      projects = this.getAll();
-      for(project of projects){
-        if(project.id == window.localStorage["selected_id"]){
-          project.todos.push({title: todo_message, done: false});    //add todo
-          window.localStorage['projects'] = angular.toJson(projects);   //save
-          return;
-        }
-      }
-    }
-  };
-});
-
 // returns [start, start+1, start+2, ..., start+(count-1)]
 function range(start, count) {
   return Array.apply(0, Array(count))
@@ -70,17 +8,121 @@ function range(start, count) {
   });
 }
 
-myApp.controller('todoListCtrl', function($rootScope, s_projects) {
-  $rootScope.include = function(arr, obj) {
-    return (arr.indexOf(obj) != -1);
+function include(arr, obj) {
+  return (arr.indexOf(obj) != -1);
+}
+
+myApp.factory("s_bookings", function(){
+  return {
+    init: function(){
+      this.bookings = angular.fromJson(localStorage["bookings"]) || [];
+      this.next_id = angular.fromJson(localStorage["bookings_next_id"]) || 0;
+    },
+    book: function(_shop, _date, _hour, _amount){
+      console.log("this.bookings : " + this.bookings);
+      this.bookings.push({
+        id: this.next_id,
+        shop: _shop,
+        date: _date,
+        hour: _hour,
+        amount: _amount
+      });
+      this.next_id += 1;
+      this.save();  // In case the user unexpectedly exits the program
+    },
+    getById: function(id){
+      for(var i=0; i<this.bookings.length; i++){
+        if(this.bookings[i].id == id){
+          return this.bookings[i];
+        }
+      }
+    },
+    getIndexById: function(id){
+      //only for use inside this service.
+      for(var i=0; i<this.bookings.length; i++){
+        if(this.bookings[i].id == id){
+          return i;
+        }
+      }
+    },
+    remove: function(id){
+      this.bookings.splice(this.getIndexById(id), 1);
+      this.save();
+    },
+    getAll: function(){
+      return this.bookings;
+    },
+    save: function(){
+      localStorage["bookings"] = angular.toJson(this.bookings);
+      localStorage["bookings_next_id"] = angular.toJson(this.next_id);
+    }
   }
+});
+
+myApp.controller('todoListCtrl', function($rootScope, $ionicScrollDelegate, s_bookings, $state) {
+  $rootScope.include = include;
 
   $rootScope.hours = [];
-  for(var hour=0; hour<24; hour++){
+  for(hour of ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]){
     for(min of ["00", "15", "30", "45"]){
-      $rootScope.hours.push(hour.toString() + "h" + min);
+      $rootScope.hours.push(hour + "h" + min);
     }
   }
 
+  $rootScope.select_hour = function(hour){
+    $rootScope.booking_hour = hour;
+  }
+
+  $rootScope.later = function(){
+    if( include($rootScope.hour_index_range, 99) ){
+      //Already latest
+      return;
+    }
+    for (var i=0; i<$rootScope.hour_index_range.length; i++) {
+      $rootScope.hour_index_range[i] += 12;
+    }
+  }
+
+  $rootScope.earlier = function(){
+    if( include($rootScope.hour_index_range, 0) ){
+      //Already earliest
+      return;
+    }
+    for (var i=0; i<$rootScope.hour_index_range.length; i++) {
+      $rootScope.hour_index_range[i] -= 12;
+    }
+  }
+
+  $rootScope.hour_button_class = function(hour){
+    if(hour == $rootScope.booking_hour){
+      return "selected"
+    }
+  }
+
+  $rootScope.book = function(_shop, _date, _hour, _amount) {
+    s_bookings.book(_shop, _date, _hour, _amount);
+
+    // update scope
+    $rootScope.bookings = s_bookings.getAll();
+  }
+
+  $rootScope.remove = function(id) {
+    s_bookings.remove(id);
+
+    // update scope
+    $rootScope.bookings = s_bookings.getAll();
+  }
+
+  $rootScope.goToHome = function() {
+    $state.go('tab.projects');
+  }
+
   $rootScope.hour_index_range = range(64, 12);
+
+  $rootScope.booking_date = new Date();
+  $rootScope.booking_amount = 2;
+  $rootScope.booking_hour = "16h00";
+  $rootScope.cur_shop = "Le Café des invalides";
+
+  s_bookings.init();
 })

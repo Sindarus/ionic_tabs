@@ -9836,6 +9836,9 @@ a.button {
 img {
   display: block; }
 
+.spacer {
+  padding-top: 100px; }
+
 /* HEADER ========================================================================== */
 #header {
   background: #ff7f00 !important;
@@ -9877,7 +9880,7 @@ img {
       height: 25px; }
 
 /* SHOP BOOKING PAGE ============================================================== */
-#booking {
+#shop_booking #booking {
   text-align: center; }
 
 #shop_booking #shop_img {
@@ -9918,19 +9921,41 @@ img {
 #shop_booking #booking_infos .h_separator, #shop_booking #booking_infos .v_separator {
   border-color: #a5adb8; }
 
-#shop_booking #booking_infos span {
-  font-size: 18px;
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  color: #3c4147; }
-
 #shop_booking #booking_infos .my_container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around; }
+  flex-direction: row; }
 
-#shop_booking #booking_infos span {
-  margin: 15px 0 15px 0; }
+#shop_booking #booking_infos .input_container {
+  padding: 0;
+  border-width: 0;
+  margin: 6px 0 6px 0;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+
+#shop_booking #booking_infos input, #shop_booking #booking_infos .input_container {
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #3c4147;
+  text-align: center;
+  background: white; }
+
+#shop_booking #booking_infos input {
+  margin: 0;
+  padding: 0;
+  border-width: 0; }
+
+#shop_booking #booking_infos #number_input {
+  width: 40px; }
+
+#shop_booking #booking_infos #date_input {
+  width: 100%;
+  /* c'est moche mais c'est la seule solution que j'ai trouvée, vu que la
+               flexbox ne résoud pas le problème. */
+  padding-top: 7px; }
 
 #shop_booking #booking_infos .v_separator {
   margin: 5px 0 5px 0; }
@@ -9953,14 +9978,30 @@ img {
       border-width: 1px;
       border-style: solid;
       border-radius: 5px;
+      border-color: black;
       margin-top: 7px;
       margin-bottom: 7px;
       padding: 2px 5px 2px 5px;
       font-size: 16px; }
+    #shop_booking #hour_picker #hour_buttons .selected {
+      background: #ff7f00;
+      /* Old browsers */
+      background: -moz-linear-gradient(left, #ff7f00 0%, #ff0000 100%);
+      /* FF3.6-15 */
+      background: -webkit-linear-gradient(left, #ff7f00 0%, #ff0000 100%);
+      /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to right, #ff7f00 0%, #ff0000 100%);
+      /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7f00', endColorstr='#ff3b00',GradientType=1 );
+      /* IE6-9 */
+      color: white; }
 
 #shop_booking #recap {
   font-size: 10px;
   color: #a5adb8; }
+
+#shop_booking a {
+  text-decoration: none; }
 
 #shop_booking #validate {
   padding: 6px 30px 6px 30px;
@@ -9981,3 +10022,51 @@ img {
   font-size: 16px;
   color: white;
   text-transform: uppercase; }
+
+#my_bookings {
+  /* item-content is set automatically by ionic*/ }
+  #my_bookings #intro {
+    padding: 10px;
+    text-align: center;
+    color: #a5adb8; }
+  #my_bookings .item-content {
+    background: #9b6299;
+    padding: 20px; }
+  #my_bookings .booking_card {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px; }
+    #my_bookings .booking_card .booking_data {
+      text-align: left;
+      display: flex; }
+      #my_bookings .booking_card .booking_data .booking_info {
+        width: 80%; }
+        #my_bookings .booking_card .booking_data .booking_info .title {
+          /* So that the border only goes under the title, but the following
+                       content does not collide */
+          display: inline-block;
+          padding-bottom: 7px;
+          font-size: 24px;
+          border-bottom-width: 1px;
+          border-bottom-style: solid;
+          border-bottom-color: white; }
+        #my_bookings .booking_card .booking_data .booking_info .booking_details {
+          margin: 20px 0 20px 0; }
+          #my_bookings .booking_card .booking_data .booking_info .booking_details .booking_detail {
+            margin: 5px 0px 5px 0px; }
+      #my_bookings .booking_card .booking_data .booking_category {
+        width: 20%;
+        /* The two following lines make the logo appear right */
+        display: flex;
+        justify-content: flex-end; }
+        #my_bookings .booking_card .booking_data .booking_category img {
+          height: 20px; }
+    #my_bookings .booking_card .go_there_button {
+      display: inline;
+      padding: 5px 10px 5px 10px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: white;
+      border-radius: 5px;
+      font-size: 10px;
+      text-transform: uppercase; }

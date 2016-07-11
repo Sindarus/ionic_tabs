@@ -1,0 +1,7 @@
+ARM: ultra lent.
+intel atom x86_64 : ultra rapide mais les applis marchent pas :c
+intel atom x86 : ultra rapide aussi mais les applis marchent pas :c
+google api ARM : pas testé
+google api intel atom x86 : lent et lourd
+google api intel atom x86_64 : un peu mieux
+

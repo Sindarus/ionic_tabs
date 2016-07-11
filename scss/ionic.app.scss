@@ -45,6 +45,10 @@ img {
     display: block;
 }
 
+.spacer {
+    padding-top: 100px;
+}
+
 /* HEADER ========================================================================== */
 #header {
     background: #ff7f00 !important; /* Old browsers */
@@ -96,11 +100,10 @@ img {
 }
 
 /* SHOP BOOKING PAGE ============================================================== */
-#booking {
-    text-align: center;
-}
-
 #shop_booking {
+    #booking {
+        text-align: center;
+    }
     #shop_img {
         overflow: hidden;
         position: relative;     /* just so that child's "position: absolute", is absolute
@@ -155,21 +158,49 @@ img {
             border-color: #a5adb8;
         }
 
-        span{
-            font-size: 18px;
-            font-weight: 900;
-            letter-spacing: 0.5px;
-            color: #3c4147;
-        }
-
         .my_container {
             display: flex;
             flex-direction: row;
-            justify-content: space-around;
         }
 
-        span {
-            margin: 15px 0 15px 0;
+        .input_container {
+            padding: 0;
+            border-width: 0;
+             margin: 6px 0 6px 0;
+
+            width: 50%;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input, .input_container {
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            color: #3c4147;
+            text-align: center;
+
+            background: white;
+        }
+
+        input {
+            margin: 0;
+            padding: 0;
+            border-width: 0;
+        }
+
+        #number_input {
+            width: 40px;
+        }
+
+        #date_input {
+            width: 100%;
+            /* c'est moche mais c'est la seule solution que j'ai trouvée, vu que la
+               flexbox ne résoud pas le problème. */
+            padding-top: 7px;
         }
 
         .v_separator {
@@ -200,6 +231,7 @@ img {
                 border-width: 1px;
                 border-style: solid;
                 border-radius: 5px;
+                border-color: black;
 
                 margin-top: 7px;
                 margin-bottom: 7px;
@@ -207,12 +239,26 @@ img {
 
                 font-size: 16px;
             }
+
+            .selected {
+                background: #ff7f00; /* Old browsers */
+                background: -moz-linear-gradient(left, #ff7f00 0%, #ff0000 100%); /* FF3.6-15 */
+                background: -webkit-linear-gradient(left, #ff7f00 0%,#ff0000 100%); /* Chrome10-25,Safari5.1-6 */
+                background: linear-gradient(to right, #ff7f00 0%,#ff0000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff7f00', endColorstr='#ff3b00',GradientType=1 ); /* IE6-9 */
+
+                color: white;
+            }
         }
     }
 
     #recap {
         font-size: 10px;
         color: #a5adb8;
+    }
+
+    a {
+        text-decoration: none;
     }
 
     #validate {
@@ -232,5 +278,82 @@ img {
         font-size: 16px;
         color: white;
         text-transform: uppercase;
+    }
+}
+
+#my_bookings {
+    #intro {
+        padding: 10px;
+
+        text-align: center;
+        color: #a5adb8;
+    }
+
+    /* item-content is set automatically by ionic*/
+    .item-content {
+        //border-width: 0;
+        background: #9b6299;
+        padding: 20px;
+    }
+
+    .booking_card {
+        text-align: center;
+        color: white;
+        margin-bottom: 20px;
+
+        .booking_data {
+            text-align: left;
+            display: flex;
+
+            .booking_info {
+                width: 80%;
+
+                .title {
+                    /* So that the border only goes under the title, but the following
+                       content does not collide */
+                    display: inline-block;
+
+                    padding-bottom: 7px;
+
+                    font-size: 24px;
+
+                    border-bottom-width: 1px;
+                    border-bottom-style: solid;
+                    border-bottom-color: white;
+                }
+
+                .booking_details {
+                    margin: 20px 0 20px 0;
+                    .booking_detail {
+                        margin: 5px 0px 5px 0px;
+                    }
+                }
+            }
+
+            .booking_category {
+                width: 20%;
+                /* The two following lines make the logo appear right */
+                display: flex;
+                justify-content: flex-end;
+
+                img {
+                    height: 20px;
+                }
+            }
+        }
+
+        .go_there_button {
+            display: inline;
+
+            padding: 5px 10px 5px 10px;
+
+            border-width: 1px;
+            border-style: solid;
+            border-color: white;
+            border-radius: 5px;
+
+            font-size: 10px;
+            text-transform: uppercase;
+        }
     }
 }

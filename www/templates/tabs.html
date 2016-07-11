@@ -15,20 +15,13 @@ navigation history that also transitions its views in and out.
 
 </ion-tabs> -->
 
-<div id="header">
-  <div id="back_arrow">
-    <a href="#">
-      <img src="img/back_arrow.png"></img>
-    </a>
-  </div>
-  <div id="logo">
-    <img src="img/logo.png"></img>
-  </div>
-  <div id="action_bar">
-    <img src="img/action_bar.png"></img>
-  </div>
-</div>
+<ion-tabs class="tabs-icon-top tabs-positive">
 
-<ion-nav-view name="tab-projects"><!-- here we will render tab/projetcs NAME ATTRIBUTE IS RELEVANT. This is managed by ui-router --></ion-nav-view>
-<ion-nav-view name="tab-todoList"><!-- here we will render tab/todoList NAME ATTRIBUTE IS RELEVANT. This is managed by ui-router --></ion-nav-view>
+  <ion-tab title="Home" icon="ion-home" href="#/tab/connect">
+    <ion-nav-view name="tab-connect"></ion-nav-view>
+  </ion-tab>
 
+  <ion-tab title="About" icon="ion-ios-information" href="#/tab/dashboard">
+    <ion-nav-view name="tab-dashboard"></ion-nav-view>
+  </ion-tab>
+</ion-tabs>
